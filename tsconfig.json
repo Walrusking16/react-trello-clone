@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
