@@ -1,10 +1,9 @@
-import useBoards from "../Storage";
 import {Fragment, useEffect, useRef, useState} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {TemplateIcon} from "@heroicons/react/solid";
+import BoardService from "../Services/BoardService";
 
 export default (props) => {
-    const boards = useBoards();
     const cancelButtonRef = useRef(null)
     const [board, setBoard] = useState(undefined);
     const [boardName, setBoardName] = useState("");
@@ -12,14 +11,14 @@ export default (props) => {
     useEffect(() => {
         if (props.id === null || isNaN(props.id)) return;
 
-        const brd = boards.getBoard(props.id);
+        const brd = BoardService.getBoard(props.id);
 
         setBoard(brd);
         setBoardName(brd.name);
     }, [props])
 
     function onSave() {
-        boards.updateBoard(board.id, {name: boardName});
+        BoardService.updateBoard(board.id, {name: boardName});
 
         props.setOpen(false);
     }
@@ -59,7 +58,7 @@ export default (props) => {
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                                         {board?.name ?? ''}
                                     </Dialog.Title>
-                                    <div className="mt-2">
+                                    <div className="mt-3">
                                         <div>
                                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                                                 Name
